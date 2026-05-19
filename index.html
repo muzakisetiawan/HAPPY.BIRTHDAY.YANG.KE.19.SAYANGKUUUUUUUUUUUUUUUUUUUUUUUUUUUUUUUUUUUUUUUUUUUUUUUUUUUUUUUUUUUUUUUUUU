@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Happy Birthday, Ayu Wina Widiana</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+
+<!-- MUSIK: lagu.mp3 harus ada di folder yang sama dengan file HTML ini -->
+<audio id="bgm" src="lagu.mp3" loop preload="auto"></audio>
+
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 :root{
@@ -16,28 +20,75 @@ html,body{width:100%;min-height:100vh;background:#080604;display:flex;justify-co
 #app{width:390px;min-height:100vh;position:relative;overflow:hidden;background:#080604;}
 
 /* ══ INTRO ══ */
-#intro{position:fixed;top:0;left:50%;transform:translateX(-50%);width:390px;height:100vh;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;z-index:2000;cursor:pointer;}
+#intro{
+  position:fixed;top:0;left:50%;transform:translateX(-50%);
+  width:390px;height:100vh;background:#000;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:18px;z-index:2000;cursor:pointer;
+}
 #intro canvas{position:absolute;inset:0;opacity:0.3;}
-#tw{font-family:'Special Elite',cursive;color:#C8A45E;font-size:23px;letter-spacing:3px;text-align:center;position:relative;z-index:1;white-space:nowrap;overflow:hidden;width:0;border-right:2px solid #C8A45E;animation:tw 2.8s steps(22,end) 0.8s forwards,blink 0.75s step-end 3.6s infinite;}
+#tw{
+  font-family:'Special Elite',cursive;color:#C8A45E;font-size:23px;
+  letter-spacing:3px;text-align:center;position:relative;z-index:1;
+  white-space:nowrap;overflow:hidden;width:0;border-right:2px solid #C8A45E;
+  animation:tw 2.8s steps(22,end) 0.8s forwards, blink 0.75s step-end 3.6s infinite;
+}
 @keyframes tw{to{width:100%;}}
 @keyframes blink{50%{border-color:transparent;}}
-#tw-sub{font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(200,164,94,0.5);font-size:15px;letter-spacing:3px;opacity:0;animation:fi 1s ease 4s forwards;position:relative;z-index:1;}
-#tw-tap{position:absolute;bottom:55px;font-family:'Cormorant Garamond',serif;font-size:11px;color:rgba(200,164,94,0.4);letter-spacing:4px;text-transform:uppercase;opacity:0;animation:pulse 2.2s ease 5s infinite;}
+#tw-sub{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  color:rgba(200,164,94,0.5);font-size:15px;letter-spacing:3px;
+  opacity:0;animation:fi 1s ease 4s forwards;position:relative;z-index:1;
+}
+#tw-tap{
+  position:absolute;bottom:55px;font-family:'Cormorant Garamond',serif;
+  font-size:11px;color:rgba(200,164,94,0.4);letter-spacing:4px;text-transform:uppercase;
+  opacity:0;animation:pulse 2.2s ease 5s infinite;
+}
 @keyframes fi{to{opacity:1;}}
 @keyframes pulse{0%,100%{opacity:0;}50%{opacity:0.8;}}
 .iout{animation:iout 1s ease forwards!important;}
 @keyframes iout{to{opacity:0;pointer-events:none;}}
 
 /* ══ LOBBY ══ */
-#lobby{width:390px;min-height:100vh;background:radial-gradient(ellipse at 50% 25%,#1c0e06,#080604);display:flex;flex-direction:column;align-items:center;padding:36px 0 80px;opacity:0;transition:opacity 1.6s ease;}
+#lobby{
+  width:390px;min-height:100vh;
+  background:radial-gradient(ellipse at 50% 25%,#1c0e06,#080604);
+  display:flex;flex-direction:column;align-items:center;
+  padding:36px 0 80px;opacity:0;transition:opacity 1.6s ease;
+}
 #lobby.vis{opacity:1;}
-.lobby-hint{font-family:'Special Elite',cursive;font-size:10px;color:rgba(200,164,94,0.45);letter-spacing:4px;text-transform:uppercase;animation:pulse 2s ease infinite;margin-bottom:10px;}
-.lobby-quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:rgba(200,164,94,0.58);text-align:center;line-height:1.8;padding:18px 36px 0;max-width:390px;}
+.lobby-hint{
+  font-family:'Special Elite',cursive;font-size:10px;color:rgba(200,164,94,0.45);
+  letter-spacing:4px;text-transform:uppercase;animation:pulse 2s ease infinite;margin-bottom:10px;
+}
+.lobby-quote{
+  font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;
+  color:rgba(200,164,94,0.58);text-align:center;line-height:1.8;
+  padding:18px 36px 0;max-width:390px;
+}
 #bwrap{perspective:900px;cursor:pointer;margin:0 0 24px;}
-#book3d{width:220px;height:288px;position:relative;transform-style:preserve-3d;transform:rotateY(-25deg) rotateX(3deg);filter:drop-shadow(0 28px 55px rgba(0,0,0,0.88));animation:bfloat 4s ease-in-out infinite;}
-@keyframes bfloat{0%,100%{transform:rotateY(-25deg) rotateX(3deg) translateY(0);}50%{transform:rotateY(-22deg) rotateX(3deg) translateY(-9px);}}
-#book3d:hover{animation:none!important;transform:rotateY(-14deg) rotateX(2deg) translateY(-12px)!important;transition:transform 0.4s ease;}
-.b-spine{position:absolute;left:0;top:0;width:20px;height:288px;background:linear-gradient(to right,#2a0f05,#5C3317,#3a1f0d);transform:rotateY(-90deg) translateZ(10px);transform-origin:left center;display:flex;align-items:center;justify-content:center;}
+#book3d{
+  width:220px;height:288px;position:relative;transform-style:preserve-3d;
+  transform:rotateY(-25deg) rotateX(3deg);
+  filter:drop-shadow(0 28px 55px rgba(0,0,0,0.88));
+  animation:bfloat 4s ease-in-out infinite;
+}
+@keyframes bfloat{
+  0%,100%{transform:rotateY(-25deg) rotateX(3deg) translateY(0);}
+  50%{transform:rotateY(-22deg) rotateX(3deg) translateY(-9px);}
+}
+#book3d:hover{
+  animation:none!important;
+  transform:rotateY(-14deg) rotateX(2deg) translateY(-12px)!important;
+  transition:transform 0.4s ease;
+}
+.b-spine{
+  position:absolute;left:0;top:0;width:20px;height:288px;
+  background:linear-gradient(to right,#2a0f05,#5C3317,#3a1f0d);
+  transform:rotateY(-90deg) translateZ(10px);transform-origin:left center;
+  display:flex;align-items:center;justify-content:center;
+}
 .b-spine span{font-family:'Playfair Display',serif;color:var(--gold);font-size:8px;letter-spacing:3px;writing-mode:vertical-rl;transform:rotate(180deg);opacity:0.7;}
 .b-pages{position:absolute;right:0;top:2px;width:212px;height:284px;background:repeating-linear-gradient(to right,#ddd0b0,#ddd0b0 1px,#f0e6c8 1px,#f0e6c8 3px);transform:translateX(3px);}
 .b-cover{position:absolute;width:220px;height:288px;background:linear-gradient(140deg,#5C3317 0%,#3a1f0d 35%,#4d2912 65%,#6B4226 100%);border-radius:0 4px 4px 0;overflow:hidden;}
@@ -55,8 +106,16 @@ html,body{width:100%;min-height:100vh;background:#080604;display:flex;justify-co
 .spread{position:absolute;top:0;left:0;width:390px;height:100vh;display:none;}
 .spread.cur{display:block;}
 .page{width:390px;height:100vh;background:var(--paper);position:relative;overflow:hidden;}
-.page::before{content:'';position:absolute;left:0;top:0;width:100%;height:100%;background:repeating-linear-gradient(transparent 0px,transparent 30px,var(--line) 30px,var(--line) 31px);pointer-events:none;z-index:0;}
-.page::after{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(to right,rgba(107,66,38,0.2),transparent);pointer-events:none;z-index:0;}
+.page::before{
+  content:'';position:absolute;left:0;top:0;width:100%;height:100%;
+  background:repeating-linear-gradient(transparent 0px,transparent 30px,var(--line) 30px,var(--line) 31px);
+  pointer-events:none;z-index:0;
+}
+.page::after{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:4px;
+  background:linear-gradient(to right,rgba(107,66,38,0.2),transparent);
+  pointer-events:none;z-index:0;
+}
 .pi{padding:48px 26px 95px;height:100%;overflow-y:auto;position:relative;z-index:1;}
 .pi::-webkit-scrollbar{width:2px;}
 .pi::-webkit-scrollbar-thumb{background:rgba(107,66,38,0.25);}
@@ -66,16 +125,32 @@ html,body{width:100%;min-height:100vh;background:#080604;display:flex;justify-co
 .fin{animation:fin 0.5s cubic-bezier(0.55,0,0.45,1) forwards;transform-origin:left center;}
 .fout-r{animation:fout-r 0.5s cubic-bezier(0.55,0,0.45,1) forwards;transform-origin:right center;}
 .fin-r{animation:fin-r 0.5s cubic-bezier(0.55,0,0.45,1) forwards;transform-origin:right center;}
-@keyframes fout{0%{transform:perspective(1100px) rotateY(0);}45%{transform:perspective(1100px) rotateY(-90deg);box-shadow:-30px 0 50px rgba(0,0,0,0.6);}100%{transform:perspective(1100px) rotateY(-180deg);opacity:0;}}
-@keyframes fin{0%{transform:perspective(1100px) rotateY(180deg);opacity:0;}55%{transform:perspective(1100px) rotateY(90deg);box-shadow:-30px 0 50px rgba(0,0,0,0.6);}100%{transform:perspective(1100px) rotateY(0);}}
-@keyframes fout-r{0%{transform:perspective(1100px) rotateY(0);}45%{transform:perspective(1100px) rotateY(90deg);box-shadow:30px 0 50px rgba(0,0,0,0.6);}100%{transform:perspective(1100px) rotateY(180deg);opacity:0;}}
-@keyframes fin-r{0%{transform:perspective(1100px) rotateY(-180deg);opacity:0;}55%{transform:perspective(1100px) rotateY(-90deg);box-shadow:30px 0 50px rgba(0,0,0,0.6);}100%{transform:perspective(1100px) rotateY(0);}}
+@keyframes fout{
+  0%{transform:perspective(1100px) rotateY(0);}
+  45%{transform:perspective(1100px) rotateY(-90deg);box-shadow:-30px 0 50px rgba(0,0,0,0.6);}
+  100%{transform:perspective(1100px) rotateY(-180deg);opacity:0;}
+}
+@keyframes fin{
+  0%{transform:perspective(1100px) rotateY(180deg);opacity:0;}
+  55%{transform:perspective(1100px) rotateY(90deg);box-shadow:-30px 0 50px rgba(0,0,0,0.6);}
+  100%{transform:perspective(1100px) rotateY(0);}
+}
+@keyframes fout-r{
+  0%{transform:perspective(1100px) rotateY(0);}
+  45%{transform:perspective(1100px) rotateY(90deg);box-shadow:30px 0 50px rgba(0,0,0,0.6);}
+  100%{transform:perspective(1100px) rotateY(180deg);opacity:0;}
+}
+@keyframes fin-r{
+  0%{transform:perspective(1100px) rotateY(-180deg);opacity:0;}
+  55%{transform:perspective(1100px) rotateY(-90deg);box-shadow:30px 0 50px rgba(0,0,0,0.6);}
+  100%{transform:perspective(1100px) rotateY(0);}
+}
 
 /* ══ TYPOGRAPHY ══ */
 .chn{font-family:'Special Elite',cursive;font-size:10px;color:var(--brown-l);letter-spacing:5px;text-transform:uppercase;margin-bottom:5px;}
 .cht{font-family:'Playfair Display',serif;font-size:18px;color:var(--ink);font-style:italic;line-height:1.3;margin-bottom:13px;border-bottom:0.5px solid rgba(200,164,94,0.5);padding-bottom:10px;}
-.pb{font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--ink);line-height:1.78;text-align:justify;}
-.pb p{margin-bottom:9px;}
+.pb{font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--ink);line-height:1.85;text-align:justify;}
+.pb p{margin-bottom:10px;}
 .drop{font-family:'Playfair Display',serif;font-size:46px;font-style:italic;color:var(--brown);float:left;line-height:0.72;margin-right:5px;margin-top:9px;}
 .qb{border-left:2.5px solid var(--gold);padding:8px 12px;margin:11px 0;background:rgba(200,164,94,0.07);font-style:italic;font-size:13px;color:var(--brown);border-radius:0 3px 3px 0;}
 .pull{font-family:'Playfair Display',serif;font-size:16px;font-style:italic;color:var(--red);text-align:center;line-height:1.5;margin:13px 0;padding:0 6px;}
@@ -100,7 +175,7 @@ html,body{width:100%;min-height:100vh;background:#080604;display:flex;justify-co
 .cov-a{font-family:'Cormorant Garamond',serif;font-size:11px;color:rgba(200,164,94,0.48);letter-spacing:4px;text-transform:uppercase;}
 .cov-d{font-family:'Special Elite',cursive;color:rgba(200,164,94,0.58);font-size:11px;letter-spacing:3px;}
 
-/* ══ FINAL PAGE ══ */
+/* FINAL PAGE */
 .page-fin{background:linear-gradient(160deg,#120800,#050302)!important;}
 .page-fin::before,.page-fin::after{display:none!important;}
 .fin-c{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;padding:30px 34px 90px;position:relative;z-index:1;}
@@ -109,70 +184,22 @@ html,body{width:100%;min-height:100vh;background:#080604;display:flex;justify-co
 .fin-sub{font-family:'Cormorant Garamond',serif;font-size:12px;color:rgba(200,164,94,0.45);letter-spacing:2px;font-style:italic;}
 .fin-sig{font-family:'Playfair Display',serif;font-style:italic;color:var(--gold);font-size:15px;margin-top:4px;}
 
-/* Heart canvas */
-#heart-canvas{display:block;margin:0 auto;}
-
-/* ══ PHOTOS ══ */
+/* PHOTOS — Hardcoded, no tap needed */
 .pg2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0;}
-.pf{aspect-ratio:1;background:var(--cream-dark);border:2px solid rgba(200,164,94,0.55);border-radius:2px;overflow:hidden;position:relative;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform 0.25s;}
-.pf:active{transform:scale(0.97);}
+.pf{
+  aspect-ratio:1;border:2px solid rgba(200,164,94,0.55);
+  border-radius:2px;overflow:hidden;position:relative;
+}
 .pf::before{content:'';position:absolute;inset:3px;border:0.5px solid rgba(200,164,94,0.32);pointer-events:none;z-index:1;}
 .pf img{width:100%;height:100%;object-fit:cover;display:block;}
-.pph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:var(--brown-l);width:100%;height:100%;background:var(--cream-dark);}
-.pph span{font-size:24px;opacity:0.42;}
-.pph small{font-family:'Cormorant Garamond',serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;opacity:0.48;text-align:center;padding:0 8px;}
 .pcap{font-family:'Cormorant Garamond',serif;font-size:10px;font-style:italic;color:var(--brown-l);text-align:center;margin-top:3px;}
-.pfw{width:100%;aspect-ratio:3/2;background:var(--cream-dark);border:2px solid rgba(200,164,94,0.55);border-radius:2px;overflow:hidden;position:relative;cursor:pointer;margin:8px 0;display:flex;align-items:center;justify-content:center;}
+.pfw{
+  width:100%;aspect-ratio:3/2;
+  border:2px solid rgba(200,164,94,0.55);border-radius:2px;overflow:hidden;
+  position:relative;margin:8px 0;
+}
 .pfw::before{content:'';position:absolute;inset:3px;border:0.5px solid rgba(200,164,94,0.32);pointer-events:none;z-index:1;}
 .pfw img{width:100%;height:100%;object-fit:cover;display:block;}
-.phint{font-family:'Cormorant Garamond',serif;font-size:10px;font-style:italic;color:rgba(107,66,38,0.38);text-align:center;margin-top:2px;}
-
-/* ══ MEME TEXT-BASED ══ */
-.meme-box{
-  background:#fff;border:2px solid #1a1a1a;border-radius:4px;
-  overflow:hidden;margin:10px 0;
-  box-shadow:4px 4px 0 rgba(0,0,0,0.12);
-  font-family:'Special Elite',cursive;
-}
-.meme-box .top{
-  background:#1a1a1a;color:#fff;
-  font-size:12.5px;padding:9px 14px;
-  line-height:1.4;letter-spacing:0.3px;text-align:center;
-}
-.meme-box .mid{
-  padding:14px 16px;background:#fdf8f0;
-  font-family:'Cormorant Garamond',serif;
-  font-size:16px;font-style:italic;color:var(--ink);
-  text-align:center;line-height:1.6;min-height:70px;
-  display:flex;align-items:center;justify-content:center;
-  border-top:1px dashed rgba(200,164,94,0.4);
-  border-bottom:1px dashed rgba(200,164,94,0.4);
-}
-.meme-box .mid.bold{font-family:'Special Elite',cursive;font-size:14px;font-style:normal;color:#222;}
-.meme-box .bot{
-  background:#1a1a1a;color:#fff;
-  font-size:12.5px;padding:9px 14px;
-  line-height:1.4;letter-spacing:0.3px;text-align:center;
-}
-.meme-box .reaction{
-  background:#fdf8f0;padding:8px 14px;
-  font-family:'Cormorant Garamond',serif;
-  font-size:12px;font-style:italic;color:var(--brown-l);text-align:center;
-}
-.meme-caption-only{
-  background:#fff;border:2px solid #1a1a1a;border-radius:4px;
-  padding:14px 16px;margin:10px 0;text-align:center;
-  box-shadow:4px 4px 0 rgba(0,0,0,0.1);
-}
-.meme-caption-only .label{
-  font-family:'Special Elite',cursive;font-size:10px;
-  color:var(--brown-l);letter-spacing:3px;text-transform:uppercase;
-  margin-bottom:8px;
-}
-.meme-caption-only .text{
-  font-family:'Playfair Display',serif;font-size:15px;
-  font-style:italic;color:var(--ink);line-height:1.55;
-}
 
 /* DAYS */
 .days{background:rgba(200,164,94,0.1);border:0.5px solid rgba(200,164,94,0.38);border-radius:3px;padding:10px 14px;text-align:center;margin:12px 0;}
@@ -180,9 +207,19 @@ html,body{width:100%;min-height:100vh;background:#080604;display:flex;justify-co
 .days-l{font-family:'Special Elite',cursive;font-size:9px;color:var(--brown-l);letter-spacing:3px;text-transform:uppercase;}
 
 /* NAV */
-#nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:390px;padding:14px 22px 26px;background:linear-gradient(to top,rgba(8,6,4,0.97) 70%,transparent);display:none;justify-content:space-between;align-items:center;z-index:500;}
+#nav{
+  position:fixed;bottom:0;left:50%;transform:translateX(-50%);
+  width:390px;padding:14px 22px 26px;
+  background:linear-gradient(to top,rgba(8,6,4,0.97) 70%,transparent);
+  display:none;justify-content:space-between;align-items:center;z-index:500;
+}
 #nav.show{display:flex;}
-.nb{font-family:'Cormorant Garamond',serif;font-size:13px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;background:none;border:0.5px solid rgba(200,164,94,0.32);padding:9px 18px;cursor:pointer;transition:all 0.25s;border-radius:1px;}
+.nb{
+  font-family:'Cormorant Garamond',serif;font-size:13px;color:var(--gold);
+  letter-spacing:2px;text-transform:uppercase;background:none;
+  border:0.5px solid rgba(200,164,94,0.32);padding:9px 18px;
+  cursor:pointer;transition:all 0.25s;border-radius:1px;
+}
 .nb:hover{background:rgba(200,164,94,0.1);}
 .nb:disabled{opacity:0.17;cursor:default;}
 .ni{font-family:'Special Elite',cursive;font-size:10px;color:rgba(200,164,94,0.43);letter-spacing:4px;}
@@ -192,16 +229,8 @@ html,body{width:100%;min-height:100vh;background:#080604;display:flex;justify-co
 .petal{position:absolute;top:-20px;animation:fall linear infinite;opacity:0;}
 @keyframes fall{0%{opacity:1;top:-20px;}100%{opacity:0;top:110vh;}}
 
-/* MODAL */
-#pmodal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:1500;align-items:center;justify-content:center;}
-#pmodal.open{display:flex;}
-.pmo{background:var(--paper);border-radius:3px;padding:22px;width:310px;border:1px solid var(--gold);}
-.pmo-t{font-family:'Playfair Display',serif;font-size:15px;color:var(--ink);font-style:italic;margin-bottom:10px;}
-.pmo-h{font-size:11px;color:var(--brown-l);font-style:italic;margin-bottom:10px;line-height:1.55;}
-.pmo-i{width:100%;border:1px solid var(--brown-l);padding:8px 10px;font-family:'Cormorant Garamond',serif;font-size:13px;background:var(--cream);color:var(--ink);border-radius:2px;margin-bottom:8px;outline:none;}
-.pmo-bs{display:flex;gap:8px;justify-content:flex-end;}
-.pmo-b{font-family:'Cormorant Garamond',serif;font-size:13px;padding:6px 16px;border:1px solid var(--brown);background:none;color:var(--ink);cursor:pointer;border-radius:2px;}
-.pmo-b.ok{background:var(--brown);color:var(--cream);}
+/* Heart canvas */
+#heart-canvas{display:block;margin:0 auto;}
 </style>
 </head>
 <body>
@@ -251,7 +280,9 @@ html,body{width:100%;min-height:100vh;background:#080604;display:flex;justify-co
     <div class="orn">✦ ✦ ✦</div>
     <div class="cov-a">Sebuah Surat Cinta Ulang Tahun</div>
     <div class="cov-d">20 · V · MMXXVI</div>
-    <div style="position:absolute;bottom:82px;left:0;right:0;text-align:center;"><p style="font-family:'Cormorant Garamond',serif;font-size:11px;color:rgba(200,164,94,0.42);letter-spacing:2px;font-style:italic;">Written with every beat of my heart</p></div>
+    <div style="position:absolute;bottom:82px;left:0;right:0;text-align:center;">
+      <p style="font-family:'Cormorant Garamond',serif;font-size:11px;color:rgba(200,164,94,0.42);letter-spacing:2px;font-style:italic;">Written with every beat of my heart</p>
+    </div>
   </div>
 </div>
 </div>
@@ -267,7 +298,10 @@ html,body{width:100%;min-height:100vh;background:#080604;display:flex;justify-co
       <p style="margin-top:9px;">Lalu kamu hadir.</p>
       <div class="qb">"You didn't just walk into my life — you lit it up from the inside, and now I can't imagine a single day without that light."</div>
       <p>Dan sejak <strong>19 April 2025</strong> — sejak hari itu — hidupku punya warna yang belum pernah aku bayangkan sebelumnya.</p>
-      <div class="days"><div class="days-n" id="dcount">—</div><div class="days-l">Hari Bersama Kamu</div></div>
+      <div class="days">
+        <div class="days-n" id="dcount">—</div>
+        <div class="days-l">Hari Bersama Kamu</div>
+      </div>
       <div class="orn">✦ ✦ ✦</div>
       <p style="font-style:italic;text-align:center;font-size:13.5px;">Satu tahun lebih berjalan bersamamu — dan aku ingin jutaan hari berikutnya.</p>
     </div>
@@ -276,7 +310,7 @@ html,body{width:100%;min-height:100vh;background:#080604;display:flex;justify-co
 </div>
 </div>
 
-<!-- PAGE 2: KENANGAN FOTO -->
+<!-- PAGE 2: KENANGAN FOTO (foto1.png & foto2.png) -->
 <div class="spread" id="s2">
 <div class="page">
   <div class="pi">
@@ -285,16 +319,15 @@ html,body{width:100%;min-height:100vh;background:#080604;display:flex;justify-co
     <div class="washi"></div>
     <div class="pg2">
       <div>
-        <div class="pf" onclick="ep('f1')" id="f1"><div class="pph"><span>📸</span><small>Tap untuk<br>tambah foto</small></div></div>
+        <div class="pf"><img src="foto1.png" alt="kenangan 1"></div>
         <div class="pcap">Awal mula segalanya 🌸</div>
       </div>
       <div>
-        <div class="pf" onclick="ep('f2')" id="f2"><div class="pph"><span>📸</span><small>Tap untuk<br>tambah foto</small></div></div>
+        <div class="pf"><img src="foto2.png" alt="kenangan 2"></div>
         <div class="pcap">Senyummu favoritku ✨</div>
       </div>
     </div>
-    <div class="phint">Tap bingkai untuk menambahkan foto</div>
-    <div class="pb" style="margin-top:11px;">
+    <div class="pb" style="margin-top:12px;">
       <div class="qb">"I don't want to go back and change a single moment — because every step, every day, every memory led me exactly to you."</div>
       <p>Foto tidak pernah cukup untuk menangkap dirimu. Karena tidak ada lensa yang bisa menampung kehangatan yang kamu bawa setiap harinya.</p>
     </div>
@@ -303,32 +336,21 @@ html,body{width:100%;min-height:100vh;background:#080604;display:flex;justify-co
 </div>
 </div>
 
-<!-- PAGE 3: MEME 1 — CEWEK MANDIRI -->
+<!-- PAGE 3: PUJIAN & ROMANSA (menggantikan meme) -->
 <div class="spread" id="s3">
 <div class="page">
   <div class="pi">
-    <div class="ss">Selingan</div>
-    <div class="sh">Pengakuan yang Jujur</div>
-    <p style="font-family:'Cormorant Garamond',serif;font-size:12px;color:var(--brown-l);font-style:italic;text-align:center;margin-bottom:13px;">(Karena kamu terlalu relatable untuk tidak ditulis)</p>
-
-    <div class="meme-box">
-      <div class="top">Kamu kalau lagi ada masalah:</div>
-      <div class="mid">"Gapapa, aku bisa handle sendiri."</div>
-      <div class="bot">Kamu 5 menit kemudian:</div>
-      <div class="reaction">...masih handle sendiri, tapi sambil nangis di pojok kamar 🥲</div>
+    <div class="chn">Bab Kedua</div>
+    <div class="cht">Tentang Perempuan yang Bernama Ayu</div>
+    <div class="pb">
+      <span class="drop">A</span>da hal yang jarang orang sadari ketika pertama bertemu denganmu — bahwa di balik sikapmu yang tenang dan mandiri itu, tersimpan dunia yang begitu kaya. Kamu bukan tipikal perempuan yang menunggu. Kamu adalah perempuan yang bergerak, yang membangun, yang memilih jalannya sendiri dengan sadar dan penuh keyakinan.
+      <p>Dan itu, Ayu, adalah salah satu hal paling menawan yang pernah aku saksikan dalam hidup.</p>
+      <div class="qb">"Ia adalah laut yang tenang di permukaan, namun menyimpan kekuatan badai di kedalaman jiwanya."</div>
+      <p>Kamu perempuan yang suka membaca — dan aku selalu kagum melihatmu tenggelam dalam sebuah buku. Seolah seluruh dunia bisa menunggu, sementara kamu sedang bercakap-cakap dengan tokoh-tokoh yang hanya bisa dilihat olehmu. Ada keindahan luar biasa dalam itu.</p>
+      <div class="orn">✦</div>
+      <p>Kamu membawa kecerdasan yang tidak pernah kamu pamerkan. Kepedulian yang tidak pernah kamu harap dibalas. Dan keberanian yang tidak pernah kamu sebut keberanian — karena bagimu, itu hanya hal yang memang harus dilakukan.</p>
+      <div class="pull">"The most beautiful thing about you is that you don't need anyone to complete you — yet you chose me anyway."</div>
     </div>
-
-    <div class="meme-box">
-      <div class="top">Cewek mandiri itu bukan berarti gak butuh siapa-siapa.</div>
-      <div class="mid bold">"Butuh. Tapi nggak mau kelihatan butuh."<br><span style="font-size:11px;opacity:0.7;">— seluruh cewek mandiri di muka bumi</span></div>
-      <div class="bot">Dan aku bersyukur kamu mau buka pintu itu untukku.</div>
-    </div>
-
-    <div class="meme-caption-only">
-      <div class="label">✦ fakta hidup ✦</div>
-      <div class="text">"Kuat menjalani hari, mandiri menjalani hidup — tapi tetap luluh kalau disayang dengan tulus."</div>
-    </div>
-
     <div class="pnum">— III —</div>
   </div>
 </div>
@@ -338,16 +360,16 @@ html,body{width:100%;min-height:100vh;background:#080604;display:flex;justify-co
 <div class="spread" id="s4">
 <div class="page">
   <div class="pi">
-    <div class="chn">Bab Kedua</div>
+    <div class="chn">Bab Ketiga</div>
     <div class="cht">Hal-Hal yang Aku Cintai dari Dirimu</div>
     <div class="pb">
-      <p>Aku mencintai cara kamu berdiri sendiri — tegak, tenang, bahkan ketika semuanya berat. Itu bukan hal kecil. Itu luar biasa.</p>
-      <div class="qb">"Dia bukan perempuan yang menunggu diselamatkan. Dia yang memilih siapa yang layak berjalan di sampingnya."</div>
-      <p>Aku mencintai ketulusanmu. Cara kamu peduli pada hal-hal kecil. Cara kamu menjadi dirimu sendiri tanpa berpura-pura jadi siapa pun yang lain.</p>
+      <p>Aku mencintai cara kamu berdiri sendiri — tegak, tenang, bahkan ketika semuanya terasa berat. Itu bukan hal kecil. Itu adalah kekuatan yang tidak semua orang punya, dan kamu melakukannya setiap hari tanpa meminta tepuk tangan dari siapa pun.</p>
+      <div class="qb">"She wasn't looking for a knight. She was building her own kingdom."</div>
+      <p>Aku mencintai ketulusanmu. Cara kamu peduli pada hal-hal kecil yang luput dari perhatian orang lain. Cara kamu hadir — bukan sekadar secara fisik, tapi benar-benar hadir, dengan hati dan pikiranmu yang penuh.</p>
       <div class="orn">✦</div>
-      <p>Aku mencintai versi kamu yang hanya kamu tunjukkan padaku — dan betapa besar kehormatan itu bagiku untuk bisa menerimanya.</p>
-      <div class="pull">"You are my favourite version of everything I never knew I needed."</div>
-      <p>Jika aku harus menuliskan semua alasannya, aku butuh perpustakaan. Maka biarlah buku ini berdiri sebagai permulaannya.</p>
+      <p>Aku mencintai cara kamu membaca buku — dengan pensil di tangan, kadang mengernyit, kadang tersenyum sendiri pada halaman yang tidak akan pernah aku tahu isinya kecuali kamu ceritakan. Aku selalu ingin mendengar cerita itu.</p>
+      <div class="qb">"You are braver than you believe, softer than you show, and more loved than you know."</div>
+      <p>Aku mencintai versi kamu yang hanya kamu tunjukkan padaku — dan betapa besar kehormatan itu bagiku.</p>
       <div class="stamp">SEALED WITH LOVE</div>
     </div>
     <div class="pnum">— IV —</div>
@@ -355,53 +377,44 @@ html,body{width:100%;min-height:100vh;background:#080604;display:flex;justify-co
 </div>
 </div>
 
-<!-- PAGE 5: GALLERY FOTO -->
+<!-- PAGE 5: GALLERY FOTO (foto3.png wide + foto4.png & foto5.png) -->
 <div class="spread" id="s5">
 <div class="page">
   <div class="pi">
     <div class="ss">Galeri</div>
     <div class="sh">Kamu, Indah</div>
     <div class="washi"></div>
-    <div class="pfw" onclick="ep('f3')" id="f3">
-      <div class="pph" style="height:100%;"><span style="font-size:36px;">📸</span><small style="font-size:11px;letter-spacing:2px;">Foto favoritmu di sini</small></div>
+    <div class="pfw">
+      <img src="foto3.png" alt="foto utama">
     </div>
     <div class="pcap" style="font-size:12px;margin-bottom:8px;">Hal terindah yang pernah aku lihat 🌹</div>
     <div class="pg2">
       <div>
-        <div class="pf" onclick="ep('f4')" id="f4"><div class="pph"><span>📸</span><small>Tambah foto</small></div></div>
+        <div class="pf"><img src="foto4.png" alt="kenangan 4"></div>
       </div>
       <div>
-        <div class="pf" onclick="ep('f5')" id="f5"><div class="pph"><span>📸</span><small>Tambah foto</small></div></div>
+        <div class="pf"><img src="foto5.png" alt="kenangan 5"></div>
       </div>
     </div>
-    <div class="phint">Tap bingkai untuk menambahkan foto</div>
     <div class="pnum">— V —</div>
   </div>
 </div>
 </div>
 
-<!-- PAGE 6: MEME 2 — RELATE CEWEK MANDIRI -->
+<!-- PAGE 6: ROMANSA — TENTANG JATUH CINTA -->
 <div class="spread" id="s6">
 <div class="page">
   <div class="pi">
-    <div class="chn">Bab Ketiga</div>
+    <div class="chn">Bab Keempat</div>
     <div class="cht">Tentang Jatuh Cinta Padamu</div>
-
-    <div class="meme-box">
-      <div class="top">Standarnya tinggi, katanya.</div>
-      <div class="mid bold" style="font-size:13px;">"Setinggi tumit yang aku beli pakai uang sendiri."<br><span style="font-size:10px;opacity:0.65;font-family:'Cormorant Garamond',serif;font-style:italic;">— cewek yang nggak minta dibeliin apa-apa</span></div>
-      <div class="bot">Dan entah kenapa aku malah makin kagum.</div>
-    </div>
-
-    <div class="meme-box">
-      <div class="top">Orang-orang: "cewek mandiri itu susah diatur"</div>
-      <div class="mid">"Bukan susah diatur.<br>Tapi tau mana yang layak<br>didengar, mana yang tidak."</div>
-      <div class="bot">Aku berusaha jadi yang layak itu. Tiap hari.</div>
-    </div>
-
-    <div class="pb" style="margin-top:12px;">
-      <div class="qb">"Perempuan tangguh menyulam lukanya menjadi kekuatan — dan kamu melakukan itu dengan begitu indahnya."</div>
-      <p>Dan hari ini, di hari ulang tahunmu yang ke-<strong>19</strong> — aku ingin kamu tahu: memilihmu adalah keputusan terbaik yang pernah aku buat.</p>
+    <div class="pb">
+      <span class="drop">J</span>atuh cinta padamu bukan peristiwa yang datang seperti petir — bukan tiba-tiba, bukan dramatis. Ia datang perlahan, seperti halaman buku yang kamu baca: satu per satu, kata demi kata, sampai tanpa sadar kamu sudah berada di tengah cerita dan tidak mau berhenti.
+      <p>Begitulah aku mengenal kamu. Sedikit demi sedikit, lapis demi lapis. Dan setiap lapisan yang terbuka selalu lebih indah dari yang sebelumnya.</p>
+      <div class="qb">"Falling in love with you was the easiest thing I've ever done. Staying in love with you is the greatest privilege I've ever known."</div>
+      <p>Kamu perempuan yang tidak mudah dibaca — dan justru itu yang membuatku tidak pernah berhenti ingin mengenalmu lebih dalam. Setiap hari adalah penemuan baru. Setiap percakapan adalah halaman yang belum pernah aku baca sebelumnya.</p>
+      <div class="orn">✦</div>
+      <p>Dan hari ini, di hari ulang tahunmu yang ke-<strong>19</strong> — aku ingin kamu tahu: memilihmu, dicintai olehmu, adalah keputusan dan anugerah terbaik dalam hidup ini.</p>
+      <div class="pull">"I love you not only for what you are, but for what I am when I am with you."</div>
     </div>
     <div class="pnum">— VI —</div>
   </div>
@@ -412,15 +425,15 @@ html,body{width:100%;min-height:100vh;background:#080604;display:flex;justify-co
 <div class="spread" id="s7">
 <div class="page">
   <div class="pi">
-    <div class="chn">Bab Keempat</div>
+    <div class="chn">Bab Kelima</div>
     <div class="cht">Yang Aku Janjikan Padamu</div>
     <div class="pb">
       <div class="pull">"Bukan hanya hari ini — tapi setiap hari sesudahnya."</div>
-      <p>Aku berjanji untuk menjadi rumahmu ketika dunia terasa terlalu keras. Menjadi tempatmu beristirahat — tanpa syarat, tanpa menghakimi — karena kamu yang paling kuat pun berhak untuk lelah.</p>
+      <p>Aku berjanji untuk menjadi rumahmu ketika dunia terasa terlalu keras. Menjadi tempatmu beristirahat — tanpa syarat, tanpa menghakimi — karena kamu yang paling kuat pun berhak untuk sesekali lelah dan tidak baik-baik saja.</p>
       <div class="orn">✦</div>
-      <p>Aku berjanji tidak akan pernah membuatmu merasa harus kuat sendirian lagi. Kamu sudah cukup berjuang sendiri — sekarang ada aku, dan itu tidak akan berubah.</p>
-      <div class="qb">"Menjadi mandiri bukan tentang berjalan sendirian, tapi tentang tidak kehilangan arah saat tak ada yang menemani. Dan aku ingin jadi alasan kamu tidak pernah kehilangan arah itu."</div>
-      <p>Kamu sudah membuat hidupku lebih baik hanya dengan menjadi dirimu sendiri.</p>
+      <p>Aku berjanji tidak akan pernah membuatmu merasa harus menanggung segalanya sendirian lagi. Kamu sudah cukup berjuang sendiri. Sekarang ada aku — dan itu tidak akan pernah berubah.</p>
+      <div class="qb">"Menjadi mandiri bukan tentang berjalan sendirian, tapi tentang tidak kehilangan arah saat tak ada yang menemani. Dan aku ingin menjadi alasan kamu tidak pernah kehilangan arah itu — bukan karena kamu membutuhkanku, tapi karena kamu memilihku."</div>
+      <p>Kamu sudah membuat hidupku lebih baik hanya dengan menjadi dirimu sendiri. Hanya dengan ada.</p>
       <div class="orn">✦ ✦ ✦</div>
       <p style="text-align:center;font-style:italic;font-size:13.5px;">"Tetaplah di sini. Selamanya. Kumohon."</p>
       <div class="stamp" style="transform:rotate(2deg);margin-top:8px;">SINCERELY YOURS</div>
@@ -430,7 +443,7 @@ html,body{width:100%;min-height:100vh;background:#080604;display:flex;justify-co
 </div>
 </div>
 
-<!-- PAGE 8: MORE FOTO -->
+<!-- PAGE 8: MORE FOTO (foto6.png, foto7.png, foto8.png) -->
 <div class="spread" id="s8">
 <div class="page">
   <div class="pi">
@@ -439,19 +452,18 @@ html,body{width:100%;min-height:100vh;background:#080604;display:flex;justify-co
     <div class="washi"></div>
     <div class="pg2">
       <div>
-        <div class="pf" onclick="ep('f6')" id="f6"><div class="pph"><span>📸</span><small>Tap untuk<br>tambah foto</small></div></div>
+        <div class="pf"><img src="foto6.png" alt="kenangan 6"></div>
         <div class="pcap">Momen itu 💫</div>
       </div>
       <div>
-        <div class="pf" onclick="ep('f7')" id="f7"><div class="pph"><span>📸</span><small>Tap untuk<br>tambah foto</small></div></div>
+        <div class="pf"><img src="foto7.png" alt="kenangan 7"></div>
         <div class="pcap">Selalu cantik 🌺</div>
       </div>
     </div>
-    <div class="pfw" onclick="ep('f8')" id="f8" style="margin-top:10px;">
-      <div class="pph" style="height:100%;"><span style="font-size:30px;">📸</span><small style="font-size:11px;letter-spacing:2px;">Foto berdua kita</small></div>
+    <div class="pfw" style="margin-top:10px;">
+      <img src="foto8.png" alt="berdua">
     </div>
     <div class="pcap" style="font-size:12px;">Dua orang, satu cerita 💑</div>
-    <div class="phint">Tap bingkai untuk menambahkan foto</div>
     <div class="pnum">— VIII —</div>
   </div>
 </div>
@@ -464,11 +476,11 @@ html,body{width:100%;min-height:100vh;background:#080604;display:flex;justify-co
     <div class="chn">Halaman Terakhir</div>
     <div class="cht">Surat yang Tidak Akan Pernah Selesai</div>
     <div class="pb">
-      <span class="drop">A</span>yu, di hari kamu dilahirkan 19 tahun yang lalu, dunia ini diam-diam menjadi lebih baik — meskipun dunia belum tahu itu. Aku tahu. Aku merasakannya setiap hari sejak kita bersama.
+      <span class="drop">A</span>yu, di hari kamu dilahirkan sembilan belas tahun yang lalu, dunia ini diam-diam menjadi lebih baik — meskipun dunia belum tahu itu. Aku tahu. Aku merasakannya setiap hari sejak kita bersama.
       <div class="orn">✦</div>
-      <p>Sembilan belas tahun kamu menjalani hidupmu, membentuk dirimu, belajar berdiri sendiri, jatuh dan bangkit lagi — dan menjadi perempuan luar biasa yang sekarang ada. Aku bersyukur, begitu dalam, bahwa jalanmu dan jalanku akhirnya bertemu.</p>
+      <p>Sembilan belas tahun kamu menjalani hidupmu — belajar, jatuh, bangkit, membaca ribuan halaman, bertumbuh menjadi seseorang yang jauh lebih besar dari yang kamu bayangkan tentang dirimu sendiri. Dan aku bersyukur, begitu dalam, bahwa jalanmu dan jalanku akhirnya bertemu.</p>
       <div class="qb">"Jangan cari ia di balik bayang-bayang orang lain. Ia adalah cahayanya sendiri." — Dan kamu, Ayu, adalah cahaya terkuat yang pernah aku lihat.</div>
-      <p>Buku ini tidak akan pernah cukup. Tidak ada halaman yang cukup, tidak ada kata yang cukup. Maka anggaplah ini sebagai permulaan — bab pertama dari sisa cerita kita.</p>
+      <p>Buku ini tidak akan pernah cukup untuk menampung semua yang aku rasakan. Tidak ada halaman yang cukup, tidak ada kata yang cukup, tidak ada tinta sebanyak apa pun yang cukup. Maka anggaplah ini sebagai permulaan — bab pertama dari sisa cerita kita yang masih sangat panjang.</p>
       <div class="orn">✦ ✦ ✦</div>
       <p style="text-align:right;font-style:italic;margin-top:8px;">Selamanya milikmu,<br><strong>Yang Mencintaimu</strong></p>
     </div>
@@ -477,17 +489,14 @@ html,body{width:100%;min-height:100vh;background:#080604;display:flex;justify-co
 </div>
 </div>
 
-<!-- PAGE 10: FINALE dengan 3D HEART -->
+<!-- PAGE 10: FINALE — 3D HEART -->
 <div class="spread" id="s10">
 <div class="page page-fin">
   <div class="fin-c">
     <div class="fin-t">Selamat Ulang Tahun,</div>
     <div class="fin-n">Ayu Wina Widiana</div>
     <div class="fin-sub">Happy 19th Birthday, my love 🎂</div>
-
-    <!-- 3D ANIMATED HEART CANVAS -->
     <canvas id="heart-canvas" width="300" height="300"></canvas>
-
     <div class="orn" style="color:var(--gold);margin-top:0;">✦ ✦ ✦</div>
     <div style="font-family:'Cormorant Garamond',serif;font-size:14px;color:rgba(245,237,214,0.65);line-height:1.8;max-width:270px;text-align:center;font-style:italic;">
       "Kamu adalah puisi yang tidak pernah aku tahu cara menulisnya — dan buku ini adalah usahaku yang pertama."
@@ -507,294 +516,267 @@ html,body{width:100%;min-height:100vh;background:#080604;display:flex;justify-co
   <button class="nb" id="nb" onclick="turn(1)">Lanjut →</button>
 </div>
 
-<!-- PHOTO MODAL -->
-<div id="pmodal">
-  <div class="pmo">
-    <div class="pmo-t">📸 Tambahkan Foto</div>
-    <p class="pmo-h">Masukkan URL gambar langsung (diakhiri .jpg / .png / .webp), atau path lokal seperti:<br><code style="font-size:10px;color:var(--brown);">file:///C:/Foto/kita.jpg</code></p>
-    <input type="text" id="purl" class="pmo-i" placeholder="https://... atau file:///...">
-    <div class="pmo-bs">
-      <button class="pmo-b" onclick="cpm()">Batal</button>
-      <button class="pmo-b ok" onclick="spm()">Simpan ✓</button>
-    </div>
-  </div>
-</div>
-
 </div><!-- app -->
 
 <script>
 /* ── STARS ── */
-const cv=document.getElementById('sc'),cx=cv.getContext('2d');
-cv.width=390;cv.height=window.innerHeight;
-const st=Array.from({length:130},()=>({x:Math.random()*390,y:Math.random()*cv.height,r:Math.random()*1.2+0.3,o:Math.random(),s:Math.random()*0.005+0.002}));
-(function ds(){cx.clearRect(0,0,390,cv.height);st.forEach(s=>{s.o+=s.s;if(s.o>1||s.o<0)s.s*=-1;cx.beginPath();cx.arc(s.x,s.y,s.r,0,Math.PI*2);cx.fillStyle=`rgba(200,164,94,${s.o})`;cx.fill();});requestAnimationFrame(ds);})();
+const cv = document.getElementById('sc'), cx = cv.getContext('2d');
+cv.width = 390; cv.height = window.innerHeight;
+const st = Array.from({length:130}, () => ({
+  x: Math.random()*390, y: Math.random()*cv.height,
+  r: Math.random()*1.2+0.3, o: Math.random(), s: Math.random()*0.005+0.002
+}));
+(function ds() {
+  cx.clearRect(0,0,390,cv.height);
+  st.forEach(s => {
+    s.o += s.s; if(s.o>1||s.o<0) s.s *= -1;
+    cx.beginPath(); cx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    cx.fillStyle = `rgba(200,164,94,${s.o})`; cx.fill();
+  });
+  requestAnimationFrame(ds);
+})();
+
+/* ── MUSIC ── */
+const bgm = document.getElementById('bgm');
+bgm.volume = 0.55;
+
+function playMusic() {
+  // Needed because browsers require user gesture to autoplay
+  bgm.play().catch(() => {});
+}
 
 /* ── DAYS ── */
-function calcDays(){
-  const s=new Date('2025-04-19'),t=new Date('2026-05-20');
-  const d=Math.floor((t-s)/864e5);
-  const el=document.getElementById('dcount');
-  if(el)el.textContent=d;
+function calcDays() {
+  const s = new Date('2025-04-19'), t = new Date('2026-05-20');
+  const d = Math.floor((t - s) / 864e5);
+  const el = document.getElementById('dcount');
+  if (el) el.textContent = d;
 }
 
 /* ── INTRO → LOBBY ── */
-function startBook(){
-  const i=document.getElementById('intro');
+function startBook() {
+  const i = document.getElementById('intro');
   i.classList.add('iout');
-  setTimeout(()=>{
-    i.style.display='none';
+  playMusic(); // Mulai musik saat tombol pertama ditekan
+  setTimeout(() => {
+    i.style.display = 'none';
     document.getElementById('lobby').classList.add('vis');
-    lp();
-  },1000);
+  }, 1000);
 }
 
 /* ── LOBBY → READER ── */
-function openReader(){
-  const bk=document.getElementById('book3d');
-  bk.style.animation='none';
-  bk.style.transition='transform 0.65s cubic-bezier(0.55,0,0.45,1)';
-  bk.style.transform='rotateY(-90deg) scale(1.05)';
-  setTimeout(()=>{
-    document.getElementById('lobby').style.display='none';
+function openReader() {
+  const bk = document.getElementById('book3d');
+  bk.style.animation = 'none';
+  bk.style.transition = 'transform 0.65s cubic-bezier(0.55,0,0.45,1)';
+  bk.style.transform = 'rotateY(-90deg) scale(1.05)';
+  setTimeout(() => {
+    document.getElementById('lobby').style.display = 'none';
     document.getElementById('reader').classList.add('open');
     document.getElementById('nav').classList.add('show');
-    calcDays();lp();un();
-  },650);
+    calcDays();
+    un();
+  }, 650);
 }
 
 /* ── FLIP ── */
-const TOTAL=11;let cur=0,busy=false;
-function turn(d){
-  if(busy)return;
-  const nxt=cur+d;
-  if(nxt<0||nxt>=TOTAL)return;
-  busy=true;
-  const cs=document.getElementById('s'+cur);
-  const ns=document.getElementById('s'+nxt);
-  const cp=cs.querySelector('.page');
-  const np=ns.querySelector('.page');
-  ns.style.display='block';ns.style.zIndex='1';
-  cs.style.zIndex='2';
-  cp.classList.add(d>0?'fout':'fout-r');
-  setTimeout(()=>{
-    cs.style.display='none';cs.classList.remove('cur');
-    np.classList.add(d>0?'fin':'fin-r');
+const TOTAL = 11;
+let cur = 0, busy = false;
+
+function turn(d) {
+  if (busy) return;
+  const nxt = cur + d;
+  if (nxt < 0 || nxt >= TOTAL) return;
+  busy = true;
+
+  const cs = document.getElementById('s' + cur);
+  const ns = document.getElementById('s' + nxt);
+  const cp = cs.querySelector('.page');
+  const np = ns.querySelector('.page');
+
+  ns.style.display = 'block'; ns.style.zIndex = '1';
+  cs.style.zIndex = '2';
+  cp.classList.add(d > 0 ? 'fout' : 'fout-r');
+
+  setTimeout(() => {
+    cs.style.display = 'none'; cs.classList.remove('cur');
+    np.classList.add(d > 0 ? 'fin' : 'fin-r');
     ns.classList.add('cur');
-    cur=nxt;un();
-    if(cur===TOTAL-1){sp();startHeart();}else kp();
-  },260);
-  setTimeout(()=>{
-    busy=false;
+    cur = nxt; un();
+    if (cur === TOTAL - 1) { sp(); startHeart(); } else kp();
+  }, 260);
+
+  setTimeout(() => {
+    busy = false;
     cp.classList.remove('fout','fout-r');
     np.classList.remove('fin','fin-r');
-    const pi=ns.querySelector('.pi');
-    if(pi)pi.scrollTop=0;
-  },540);
+    const pi = ns.querySelector('.pi');
+    if (pi) pi.scrollTop = 0;
+  }, 540);
 }
-function un(){
-  document.getElementById('ni').textContent=(cur+1)+' / '+TOTAL;
-  document.getElementById('pb').disabled=(cur===0);
-  document.getElementById('nb').disabled=(cur===TOTAL-1);
+
+function un() {
+  document.getElementById('ni').textContent = (cur+1) + ' / ' + TOTAL;
+  document.getElementById('pb').disabled = (cur === 0);
+  document.getElementById('nb').disabled = (cur === TOTAL - 1);
 }
 
 /* ── SWIPE ── */
-let tx=0;
-document.getElementById('reader').addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
-document.getElementById('reader').addEventListener('touchend',e=>{
-  const dx=tx-e.changedTouches[0].clientX;
-  if(Math.abs(dx)>55){if(dx>0)turn(1);else turn(-1);}
-},{passive:true});
-document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')turn(1);if(e.key==='ArrowLeft')turn(-1);});
+let tx = 0;
+document.getElementById('reader').addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
+document.getElementById('reader').addEventListener('touchend', e => {
+  const dx = tx - e.changedTouches[0].clientX;
+  if (Math.abs(dx) > 55) { if (dx > 0) turn(1); else turn(-1); }
+}, {passive:true});
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight') turn(1);
+  if (e.key === 'ArrowLeft') turn(-1);
+});
 
 /* ── PETALS ── */
-let pt=null;
-function sp(){
-  const c=document.getElementById('petals');c.innerHTML='';
-  pt=setInterval(()=>{
-    const p=document.createElement('div');p.className='petal';
-    p.textContent=['🌸','🌺','❤️','🌹','✨','💕','🎂'][Math.floor(Math.random()*7)];
-    p.style.left=Math.random()*360+'px';p.style.fontSize=(10+Math.random()*14)+'px';
-    p.style.animationDuration=(3+Math.random()*5)+'s';p.style.animationDelay=(Math.random()*1.5)+'s';
-    c.appendChild(p);setTimeout(()=>p.remove(),9000);
-  },320);
+let pt = null;
+function sp() {
+  const c = document.getElementById('petals'); c.innerHTML = '';
+  pt = setInterval(() => {
+    const p = document.createElement('div'); p.className = 'petal';
+    p.textContent = ['🌸','🌺','❤️','🌹','✨','💕','🎂'][Math.floor(Math.random()*7)];
+    p.style.left = Math.random()*360 + 'px';
+    p.style.fontSize = (10 + Math.random()*14) + 'px';
+    p.style.animationDuration = (3 + Math.random()*5) + 's';
+    p.style.animationDelay = (Math.random()*1.5) + 's';
+    c.appendChild(p); setTimeout(() => p.remove(), 9000);
+  }, 320);
 }
-function kp(){if(pt){clearInterval(pt);pt=null;}}
-
-/* ── PHOTOS ── */
-let photos=JSON.parse(localStorage.getItem('bday_ayu_ph')||'{}');
-let eid=null;
-function lp(){for(const[id,url]of Object.entries(photos))ap(id,url);}
-function ap(id,url){
-  const el=document.getElementById(id);if(!el||!url)return;
-  el.innerHTML=`<img src="${url}" alt="memory" onerror="this.parentElement.innerHTML='<div class=\\'pph\\'><span>❌</span><small>Foto tidak ditemukan</small></div>'">`;
-}
-function ep(id){eid=id;document.getElementById('purl').value=photos[id]||'';document.getElementById('pmodal').classList.add('open');}
-function cpm(){document.getElementById('pmodal').classList.remove('open');eid=null;}
-function spm(){
-  const url=document.getElementById('purl').value.trim();
-  if(url&&eid){photos[eid]=url;try{localStorage.setItem('bday_ayu_ph',JSON.stringify(photos));}catch(e){}ap(eid,url);}
-  cpm();
-}
+function kp() { if (pt) { clearInterval(pt); pt = null; } }
 
 /* ══════════════════════════════════════════
    3D ANIMATED HEART — "i love you" text
-   flowing along the heart path
+   flowing along heart path with glow
 ══════════════════════════════════════════ */
-let heartRAF=null;
-let heartStarted=false;
+let heartStarted = false;
 
-function startHeart(){
-  if(heartStarted)return;
-  heartStarted=true;
-  const canvas=document.getElementById('heart-canvas');
-  const ctx=canvas.getContext('2d');
-  const W=300,H=300;
-  canvas.width=W;canvas.height=H;
+function startHeart() {
+  if (heartStarted) return;
+  heartStarted = true;
 
-  // Heart parametric: x=16sin^3(t), y=13cos(t)-5cos(2t)-2cos(3t)-cos(4t)
-  // Scale and center
-  const scale=10.5;
-  const cx=W/2, cy=H/2+20;
+  const canvas = document.getElementById('heart-canvas');
+  const ctx = canvas.getContext('2d');
+  const W = 300, H = 300;
+  canvas.width = W; canvas.height = H;
 
-  function heartX(t){return 16*Math.pow(Math.sin(t),3);}
-  function heartY(t){return -(13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t));}
+  const scale = 10.5;
+  const ox = W / 2, oy = H / 2 + 20;
 
-  // Build path points
-  const N=300;
-  const pts=[];
-  for(let i=0;i<=N;i++){
-    const t=(i/N)*Math.PI*2;
-    pts.push({
-      x:cx+heartX(t)*scale,
-      y:cy+heartY(t)*scale
-    });
+  function hx(t) { return 16 * Math.pow(Math.sin(t), 3); }
+  function hy(t) { return -(13*Math.cos(t) - 5*Math.cos(2*t) - 2*Math.cos(3*t) - Math.cos(4*t)); }
+
+  const N = 400;
+  const pts = [];
+  for (let i = 0; i <= N; i++) {
+    const t = (i / N) * Math.PI * 2;
+    pts.push({ x: ox + hx(t)*scale, y: oy + hy(t)*scale });
   }
 
-  // Total arc length for even spacing
-  const arcLen=[];
-  arcLen[0]=0;
-  for(let i=1;i<pts.length;i++){
-    const dx=pts[i].x-pts[i-1].x;
-    const dy=pts[i].y-pts[i-1].y;
-    arcLen[i]=arcLen[i-1]+Math.sqrt(dx*dx+dy*dy);
+  const arc = [0];
+  for (let i = 1; i < pts.length; i++) {
+    const dx = pts[i].x - pts[i-1].x, dy = pts[i].y - pts[i-1].y;
+    arc[i] = arc[i-1] + Math.sqrt(dx*dx + dy*dy);
   }
-  const totalLen=arcLen[arcLen.length-1];
+  const total = arc[arc.length - 1];
 
-  // Get point at arc distance s
-  function getPointAt(s){
-    s=((s%totalLen)+totalLen)%totalLen;
-    let lo=0,hi=pts.length-1;
-    while(lo<hi-1){
-      const mid=(lo+hi)>>1;
-      if(arcLen[mid]<=s)lo=mid; else hi=mid;
+  function getAt(s) {
+    s = ((s % total) + total) % total;
+    let lo = 0, hi = pts.length - 1;
+    while (lo < hi - 1) {
+      const mid = (lo + hi) >> 1;
+      if (arc[mid] <= s) lo = mid; else hi = mid;
     }
-    const t=(s-arcLen[lo])/(arcLen[hi]-arcLen[lo]||1);
-    return{
-      x:pts[lo].x+(pts[hi].x-pts[lo].x)*t,
-      y:pts[lo].y+(pts[hi].y-pts[lo].y)*t,
-      angle:Math.atan2(pts[hi].y-pts[lo].y,pts[hi].x-pts[lo].x)
+    const t = (s - arc[lo]) / (arc[hi] - arc[lo] || 1);
+    return {
+      x: pts[lo].x + (pts[hi].x - pts[lo].x) * t,
+      y: pts[lo].y + (pts[hi].y - pts[lo].y) * t,
+      a: Math.atan2(pts[hi].y - pts[lo].y, pts[hi].x - pts[lo].x)
     };
   }
 
-  const msg='i love you ♥ ';
-  const FONT_SIZE=12;
-  const letterSpacing=8.5; // px between letter starts along path
+  const msg = 'i love you ♥ ';
+  const spacing = 9;
+  let offset = 0, last = null;
+  const SPEED = 38;
 
-  let offset=0;
-  let lastTime=null;
-  const SPEED=40; // px per second
-
-  // 3D glow colors cycling
-  const colors=[
-    {r:220,g:60,b:80},
-    {r:255,g:100,b:120},
-    {r:200,g:30,b:60},
-    {r:255,g:140,b:160},
+  const cols = [
+    [220,60,80],[255,110,130],[200,30,60],[255,160,180]
   ];
 
-  function lerp(a,b,t){return a+(b-a)*t;}
+  function lerp(a, b, t) { return a + (b-a)*t; }
 
-  function draw(ts){
-    if(!lastTime)lastTime=ts;
-    const dt=(ts-lastTime)/1000;
-    lastTime=ts;
-    offset=(offset+SPEED*dt)%totalLen;
+  function draw(ts) {
+    if (!last) last = ts;
+    const dt = (ts - last) / 1000; last = ts;
+    offset = (offset + SPEED * dt) % total;
 
-    ctx.clearRect(0,0,W,H);
+    ctx.clearRect(0, 0, W, H);
 
-    // Draw 3D heart outline (shadow layers for depth)
-    for(let layer=4;layer>=0;layer--){
-      const alpha=layer===0?0.9:0.08-layer*0.01;
-      const shift=layer*1.2;
+    // Heart outline — layered 3D effect
+    for (let layer = 5; layer >= 0; layer--) {
+      const sh = layer * 1.1;
       ctx.beginPath();
-      for(let i=0;i<pts.length;i++){
-        if(i===0)ctx.moveTo(pts[i].x+shift,pts[i].y+shift*1.5);
-        else ctx.lineTo(pts[i].x+shift,pts[i].y+shift*1.5);
+      for (let i = 0; i < pts.length; i++) {
+        const x = pts[i].x + sh, y = pts[i].y + sh * 1.4;
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
       }
       ctx.closePath();
-      if(layer===0){
-        // Glowing fill
-        const grd=ctx.createRadialGradient(cx,cy-10,10,cx,cy,120);
-        grd.addColorStop(0,'rgba(255,100,130,0.18)');
-        grd.addColorStop(1,'rgba(180,20,50,0.05)');
-        ctx.fillStyle=grd;
-        ctx.fill();
-        ctx.strokeStyle='rgba(200,60,80,0.35)';
-        ctx.lineWidth=1.5;
-        ctx.stroke();
+      if (layer === 0) {
+        const g = ctx.createRadialGradient(ox, oy-10, 8, ox, oy, 115);
+        g.addColorStop(0, 'rgba(255,100,130,0.15)');
+        g.addColorStop(1, 'rgba(160,20,45,0.04)');
+        ctx.fillStyle = g; ctx.fill();
+        ctx.strokeStyle = 'rgba(200,60,80,0.28)';
+        ctx.lineWidth = 1.5; ctx.stroke();
       } else {
-        ctx.fillStyle=`rgba(120,20,40,${alpha})`;
-        ctx.fill();
+        ctx.fillStyle = `rgba(100,15,35,${0.06 - layer*0.008})`; ctx.fill();
       }
     }
 
-    // Draw letters along path
-    ctx.font=`bold ${FONT_SIZE}px 'Special Elite', cursive`;
-    ctx.textAlign='center';
-    ctx.textBaseline='middle';
+    // Animated text along path
+    ctx.font = `bold 11.5px 'Special Elite', cursive`;
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
 
-    const totalLetters=Math.floor(totalLen/letterSpacing)+1;
-    for(let i=0;i<totalLetters;i++){
-      const s=(offset+i*letterSpacing)%totalLen;
-      const p=getPointAt(s);
-      const charIdx=i%msg.length;
-      const ch=msg[charIdx];
+    const count = Math.ceil(total / spacing) + 2;
+    for (let i = 0; i < count; i++) {
+      const s = (offset + i * spacing) % total;
+      const p = getAt(s);
+      const ch = msg[i % msg.length];
 
-      // Color: cycle through warm reds/pinks
-      const colorT=(i/msg.length)%1;
-      const ci=Math.floor(colorT*colors.length);
-      const cn=(ci+1)%colors.length;
-      const ct=(colorT*colors.length)%1;
-      const r=Math.round(lerp(colors[ci].r,colors[cn].r,ct));
-      const g=Math.round(lerp(colors[ci].g,colors[cn].g,ct));
-      const b=Math.round(lerp(colors[ci].b,colors[cn].b,ct));
-
-      // Pulsing brightness
-      const pulse=0.7+0.3*Math.sin(ts/400+i*0.5);
+      const ci = Math.floor((i / msg.length % 1) * cols.length);
+      const cn = (ci + 1) % cols.length;
+      const ct = ((i / msg.length % 1) * cols.length) % 1;
+      const r = Math.round(lerp(cols[ci][0], cols[cn][0], ct));
+      const g = Math.round(lerp(cols[ci][1], cols[cn][1], ct));
+      const b = Math.round(lerp(cols[ci][2], cols[cn][2], ct));
+      const pulse = 0.72 + 0.28 * Math.sin(ts / 380 + i * 0.55);
 
       ctx.save();
-      ctx.translate(p.x,p.y);
-      ctx.rotate(p.angle+Math.PI/2);
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.a + Math.PI / 2);
 
-      // 3D shadow
-      ctx.fillStyle=`rgba(80,0,20,0.4)`;
-      ctx.fillText(ch,1.5,1.5);
+      // depth shadow
+      ctx.fillStyle = 'rgba(60,0,15,0.45)';
+      ctx.fillText(ch, 1.5, 1.5);
 
-      // Glow
-      ctx.shadowColor=`rgba(${r},${g},${b},0.8)`;
-      ctx.shadowBlur=8;
+      // glow
+      ctx.shadowColor = `rgba(${r},${g},${b},0.85)`;
+      ctx.shadowBlur = 9;
 
-      // Main letter
-      ctx.fillStyle=`rgba(${r},${g},${b},${pulse})`;
-      ctx.fillText(ch,0,0);
-
+      ctx.fillStyle = `rgba(${r},${g},${b},${pulse})`;
+      ctx.fillText(ch, 0, 0);
       ctx.restore();
     }
 
-    heartRAF=requestAnimationFrame(draw);
+    requestAnimationFrame(draw);
   }
 
-  heartRAF=requestAnimationFrame(draw);
+  requestAnimationFrame(draw);
 }
 </script>
 </body>
